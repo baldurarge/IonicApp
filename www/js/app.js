@@ -1,40 +1,15 @@
-angular.module('ionicApp', ['ionic'])
-
-.controller('MyCtrl', function($scope,$http) {
-  $http({
-    url: "tsuts.tskoli.is/2t/0204912809/",
-    method: 'Post',
-    data: $scope.PlanDetails
-  }).then(function (result) {
-    //Some operation here
-  });
-
-
-
-  $scope.groups = [];
-  for (var i=0; i<10; i++) {
-    $scope.groups[i] = {
-      name: i,
-      items: []
-    };
-    for (var j=0; j<3; j++) {
-      $scope.groups[i].items.push(i + '-' + j);
-    }
-  }
-
-  /*
-   * if given group is the selected group, deselect it
-   * else, select the given group
-   */
-  $scope.toggleGroup = function(group) {
-    if ($scope.isGroupShown(group)) {
-      $scope.shownGroup = null;
-    } else {
-      $scope.shownGroup = group;
-    }
-  };
-  $scope.isGroupShown = function(group) {
-    return $scope.shownGroup === group;
-  };
-
-});
+var app = angular.module('ionicApp', ['ionic'])
+    .run(function($ionicPlatform) {
+      $ionicPlatform.ready(function() {
+        // Stuff in here
+      });
+    })
+    .config(function ($stateProvider, $urlRouterProvider) {
+      $stateProvider.
+          state('company',{
+            url: '/',
+            templateUrl: 'views/mainView.html',
+            controller: 'mainController'
+          });
+      $urlRouterProvider.otherwise('/');
+    });
